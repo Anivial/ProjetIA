@@ -2,13 +2,10 @@
 
 data_dir=.
 
-#train=$data_dir/arithmétique_train.csv
 train=$data_dir/sinusoide_train.csv
 
-#dev=$data_dir/arithmétique_dev.csv
 dev=$data_dir/sinusoide_dev.csv
 
-#test=$data_dir/arithmétique_test.csv
 test=$data_dir/sinusoide_test.csv
 
 input=4,5,6,7,8
