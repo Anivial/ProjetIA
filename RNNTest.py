@@ -14,7 +14,7 @@ print(model.summary(90))
 model.compile(loss='categorical_crossentropy',
               optimizer='adam')
 
-def train_generator():0
+def train_generator():
     while True:
         sequence_length = np.random.randint(10, 100)
         x_train = np.random.random((1000, sequence_length, 5))
