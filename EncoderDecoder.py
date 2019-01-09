@@ -43,15 +43,16 @@ http://www.manythings.org/anki/
 from __future__ import print_function
 
 from keras.models import Model
+from keras.models import load_model
 from keras.layers import Input, LSTM, Dense
 import numpy as np
 
 batch_size = 64  # Batch size for training.
-epochs = 100  # Number of epochs to train for.
+epochs = 5  # Number of epochs to train for.
 latent_dim = 256  # Latent dimensionality of the encoding space.
 num_samples = 10000  # Number of samples to train on.
 # Path to the data txt file on disk.
-data_path = 'fra-eng/fra.txt'
+data_path = 'data/word_phon.txt.1'
 
 # Vectorize the data.
 input_texts = []
@@ -112,7 +113,7 @@ for i, (input_text, target_text) in enumerate(zip(input_texts, target_texts)):
             # decoder_target_data will be ahead by one timestep
             # and will not include the start character.
             decoder_target_data[i, t - 1, target_token_index[char]] = 1.
-
+'''
 # Define an input sequence and process it.
 encoder_inputs = Input(shape=(None, num_encoder_tokens))
 encoder = LSTM(latent_dim, return_state=True)
@@ -142,7 +143,7 @@ model.fit([encoder_input_data, decoder_input_data], decoder_target_data,
           epochs=epochs,
           validation_split=0.2)
 # Save model
-model.save('s2s.h5')
+# model.save('s2stest.h5')
 
 # Next: inference mode (sampling).
 # Here's the drill:
@@ -166,6 +167,12 @@ decoder_model = Model(
     [decoder_inputs] + decoder_states_inputs,
     [decoder_outputs] + decoder_states)
 
+encoder_model.save('1.h5')
+decoder_model.save('2.h5')
+'''
+
+encoder_model = load_model('1.h5')
+decoder_model = load_model('2.h5')
 # Reverse-lookup token index to decode sequences back to
 # something readable.
 reverse_input_char_index = dict(
@@ -211,7 +218,7 @@ def decode_sequence(input_seq):
 
     return decoded_sentence
 
-
+'''
 for seq_index in range(100):
     # Take one sequence (part of the training set)
     # for trying out decoding.
@@ -219,4 +226,6 @@ for seq_index in range(100):
     decoded_sentence = decode_sequence(input_seq)
     print('-')
     print('Input sentence:', input_texts[seq_index])
-print('Decoded sentence:', decoded_sentence)
+    print('Decoded sentence:', decoded_sentence)
+    '''
+print(encoder_input_data)
