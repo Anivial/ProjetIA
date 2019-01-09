@@ -5,7 +5,7 @@ from keras.models import load_model
 from keras.layers import Input, LSTM, Dense
 import numpy as np
 
-data_path = 'data/word_phon.txt.1'
+data_path = 'data/data.txt'
 
 # Vectorize the data.
 input_texts = []
@@ -108,11 +108,25 @@ def decode_sequence(input_seq):
 
     return decoded_sentence
 
-for seq_index in range(100):
+
+for seq_index in range(1):
     # Take one sequence (part of the training set)
     # for trying out decoding.
+    # n = np.random.randint(0, len(input_texts)-1)
     input_seq = encoder_input_data[seq_index: seq_index + 1]
     decoded_sentence = decode_sequence(input_seq)
     print('-')
     print('Input sentence:', input_texts[seq_index])
     print('Decoded sentence:', decoded_sentence)
+
+
+def encodeWord(word):
+    dico = {"'": 0, '-': 1, 'A': 2, 'D': 3, 'F': 4, 'G': 5, 'H': 6, 'M': 7, 'P': 8, 'R': 9, 'T': 10, 'V': 11, '_': 12, 'a': 13, 'b': 14, 'c': 15, 'd': 16, 'e': 17, 'f': 18, 'g': 19, 'h': 20, 'i': 21, 'j': 22, 'k': 23, 'l': 24, 'm': 25, 'n': 26, 'o': 27, 'p': 28, 'q': 29, 'r': 30, 's': 31, 't': 32, 'u': 33, 'v': 34, 'w': 35, 'x': 36, 'y': 37, 'z': 38, 'à': 39, 'â': 40, 'ç': 41, 'è': 42, 'é': 43, 'ê': 44, 'ë': 45, 'î': 46, 'ï': 47, 'ô': 48, 'ö': 49, 'ù': 50, 'û': 51, 'ü': 52}
+    n = len(word)
+    result = np.zeros((1, max_encoder_seq_length, len(input_token_index)), dtype='float32')
+    for i in range(0, n):
+        result[0][i][input_token_index[word[i]]] = 1
+    return result
+
+print(decode_sequence(encodeWord("bouillabaisse")))
+
