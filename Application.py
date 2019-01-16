@@ -61,8 +61,9 @@ for i, (input_text, target_text) in enumerate(zip(input_texts, target_texts)):
             # and will not include the start character.
             decoder_target_data[i, t - 1, target_token_index[char]] = 1.
 
-encoder_model = load_model('1.h5')
-decoder_model = load_model('2.h5')
+encoder_model = load_model('encoder.h5')
+decoder_model = load_model('decoder.h5')
+
 # Reverse-lookup token index to decode sequences back to
 # something readable.
 reverse_input_char_index = dict(
@@ -108,7 +109,7 @@ def decode_sequence(input_seq):
 
     return decoded_sentence
 
-
+'''
 for seq_index in range(1):
     # Take one sequence (part of the training set)
     # for trying out decoding.
@@ -118,7 +119,7 @@ for seq_index in range(1):
     print('-')
     print('Input sentence:', input_texts[seq_index])
     print('Decoded sentence:', decoded_sentence)
-
+'''
 
 def encodeWord(word):
     dico = {"'": 0, '-': 1, 'A': 2, 'D': 3, 'F': 4, 'G': 5, 'H': 6, 'M': 7, 'P': 8, 'R': 9, 'T': 10, 'V': 11, '_': 12, 'a': 13, 'b': 14, 'c': 15, 'd': 16, 'e': 17, 'f': 18, 'g': 19, 'h': 20, 'i': 21, 'j': 22, 'k': 23, 'l': 24, 'm': 25, 'n': 26, 'o': 27, 'p': 28, 'q': 29, 'r': 30, 's': 31, 't': 32, 'u': 33, 'v': 34, 'w': 35, 'x': 36, 'y': 37, 'z': 38, 'à': 39, 'â': 40, 'ç': 41, 'è': 42, 'é': 43, 'ê': 44, 'ë': 45, 'î': 46, 'ï': 47, 'ô': 48, 'ö': 49, 'ù': 50, 'û': 51, 'ü': 52}
@@ -128,5 +129,7 @@ def encodeWord(word):
         result[0][i][input_token_index[word[i]]] = 1
     return result
 
-print(decode_sequence(encodeWord("bouillabaisse")))
+
+print(decode_sequence(encodeWord("bonjour")))
+
 

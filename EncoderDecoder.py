@@ -48,11 +48,11 @@ from keras.layers import Input, LSTM, Dense
 import numpy as np
 
 batch_size = 64  # Batch size for training.
-epochs = 15  # Number of epochs to train for.
+epochs = 80  # Number of epochs to train for.
 latent_dim = 256  # Latent dimensionality of the encoding space.
 num_samples = 10000  # Number of samples to train on.
 # Path to the data txt file on disk.
-data_path = 'data/data.txt'
+data_path = 'data/shuffled_data.txt'
 
 # Vectorize the data.
 input_texts = []
@@ -168,5 +168,5 @@ decoder_model = Model(
     [decoder_inputs] + decoder_states_inputs,
     [decoder_outputs] + decoder_states)
 
-encoder_model.save('1.h5')
-decoder_model.save('2.h5')
+encoder_model.save('encoder.h5')
+decoder_model.save('decoder.h5')
