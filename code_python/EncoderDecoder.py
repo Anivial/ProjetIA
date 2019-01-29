@@ -47,12 +47,14 @@ from keras.models import load_model
 from keras.layers import Input, LSTM, Dense
 import numpy as np
 
+import Utils
+
 batch_size = 64  # Batch size for training.
-epochs = 80  # Number of epochs to train for.
+epochs = 5  # Number of epochs to train for.
 latent_dim = 256  # Latent dimensionality of the encoding space.
 num_samples = 10000  # Number of samples to train on.
 # Path to the data txt file on disk.
-data_path = 'data/shuffled_data.txt'
+data_path = '../data_train/shuffled_data_train.txt'
 
 # Vectorize the data.
 input_texts = []
@@ -62,6 +64,7 @@ target_characters = set()
 with open(data_path, 'r', encoding='utf-8') as f:
     lines = f.read().split('\n')
 for line in lines[:len(lines) - 1]:
+    line = line.lower()
     if (len(line.split('\t'))) == 2:
         input_text, target_text = line.split('\t')
         # We use "tab" as the "start sequence" character
@@ -69,21 +72,13 @@ for line in lines[:len(lines) - 1]:
         target_text = '\t' + target_text + '\n'
         input_texts.append(input_text)
         target_texts.append(target_text)
-        for char in input_text:
-            if char not in input_characters:
-                input_characters.add(char)
-        for char in target_text:
-            if char not in target_characters:
-                target_characters.add(char)
     else:
         print(line)
 
-input_characters = sorted(list(input_characters))
-target_characters = sorted(list(target_characters))
-num_encoder_tokens = len(input_characters)
-num_decoder_tokens = len(target_characters)
-max_encoder_seq_length = max([len(txt) for txt in input_texts])
-max_decoder_seq_length = max([len(txt) for txt in target_texts])
+num_encoder_tokens = len(Utils.dico)
+num_decoder_tokens = len(Utils.dico_phoneme)
+max_encoder_seq_length = Utils.max_word_lengh
+max_decoder_seq_length = Utils.max_phoneme_lengh
 
 print('Number of samples:', len(input_texts))
 print('Number of unique input tokens:', num_encoder_tokens)
@@ -91,10 +86,8 @@ print('Number of unique output tokens:', num_decoder_tokens)
 print('Max sequence length for inputs:', max_encoder_seq_length)
 print('Max sequence length for outputs:', max_decoder_seq_length)
 
-input_token_index = dict(
-    [(char, i) for i, char in enumerate(input_characters)])
-target_token_index = dict(
-    [(char, i) for i, char in enumerate(target_characters)])
+input_token_index = Utils.dico
+target_token_index = Utils.dico_phoneme
 
 encoder_input_data = np.zeros(
     (len(input_texts), max_encoder_seq_length, num_encoder_tokens),
