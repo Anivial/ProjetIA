@@ -1,8 +1,6 @@
 from __future__ import print_function
 import Utils
-from keras.models import Model
 from keras.models import load_model
-from keras.layers import Input, LSTM, Dense
 import numpy as np
 
 num_encoder_tokens = len(Utils.dico)
@@ -87,7 +85,7 @@ def encodeWord(word):
     return result
 
 
-data_test = '../data_train/shuffled_data_test.txt'
+data_test = 'data_train/shuffled_data_test.txt'
 
 
 def test():
@@ -103,6 +101,5 @@ def test():
             print(output_text + " | " + phoneme)
     score = score / nb_lines
     print(score)
-
 
 test()

@@ -43,7 +43,6 @@ http://www.manythings.org/anki/
 from __future__ import print_function
 
 from keras.models import Model
-from keras.models import load_model
 from keras.layers import Input, LSTM, Dense
 import numpy as np
 
@@ -54,7 +53,7 @@ epochs = 5  # Number of epochs to train for.
 latent_dim = 256  # Latent dimensionality of the encoding space.
 num_samples = 10000  # Number of samples to train on.
 # Path to the data txt file on disk.
-data_path = '../data_train/shuffled_data_train.txt'
+data_path = 'data_train/shuffled_data_train.txt'
 
 # Vectorize the data.
 input_texts = []
