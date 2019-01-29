@@ -1,11 +1,18 @@
 import io
 import random
-file = io.open("data/shuffled_data.txt", "w", encoding="utf-8")
+train = io.open("data/shuffled_data_train.txt", "w", encoding="utf-8")
+test = io.open("data/shuffled_data_test.txt", "w", encoding="utf-8")
 tab = []
 with io.open("data/data.txt", 'r', encoding="utf-8") as source:
     for line in source:
         tab.append(line)
 random.shuffle(tab)
 
-for line in tab:
-    file.write(line)
+for i in range(0, len(tab)):
+    if i < 65000:
+        train.write(tab[i])
+    else:
+        test.write(tab[i])
+
+train.close()
+test.close()

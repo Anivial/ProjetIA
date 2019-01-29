@@ -130,6 +130,6 @@ def encodeWord(word):
     return result
 
 
-print(decode_sequence(encodeWord("bonjour")))
+print(decode_sequence(encodeWord("emmener")))
 
 
