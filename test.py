@@ -14,8 +14,8 @@ target_token_index = Utils.dico_phoneme
 # encoder_model = load_model('../model_save/LSTM_80/encoder.h5')
 # decoder_model = load_model('../model_save/LSTM_80/decoder.h5')
 
-encoder_model = load_model('encoder.h5')
-decoder_model = load_model('decoder.h5')
+encoder_model = load_model('encoderBi.h5')
+decoder_model = load_model('decoderBi.h5')
 
 # Reverse-lookup token index to decode sequences back to
 # something readable.
@@ -98,8 +98,9 @@ def test():
         phoneme = decode_sequence(encodeWord(input_text)).split('\n')[0]
         if phoneme == output_text:
             score = score + 1
-            print(output_text + " | " + phoneme)
+            # print(output_text + " | " + phoneme)
     score = score / nb_lines
     print(score)
+
 
 test()

@@ -2,6 +2,7 @@ from __future__ import print_function
 import Utils
 from keras.models import load_model
 import numpy as np
+import time
 
 num_encoder_tokens = len(Utils.dico)
 num_decoder_tokens = len(Utils.dico_phoneme)
@@ -14,8 +15,8 @@ target_token_index = Utils.dico_phoneme
 # encoder_model = load_model('../model_save/LSTM_80/encoder.h5')
 # decoder_model = load_model('../model_save/LSTM_80/decoder.h5')
 
-encoder_model = load_model('encoder.h5')
-decoder_model = load_model('decoder.h5')
+encoder_model = load_model('encoderBi.h5')
+decoder_model = load_model('decoderBi.h5')
 
 # Reverse-lookup token index to decode sequences back to
 # something readable.
@@ -70,4 +71,7 @@ def encodeWord(word):
         result[0][i][input_token_index[word[i]]] = 1
     return result
 
-print(decode_sequence(encodeWord("emmener")))
+start = time.time()
+decode_sequence(encodeWord("emmener"))
+print(time.time() - start)
+
