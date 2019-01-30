@@ -63,19 +63,6 @@ def decode_sequence(input_seq):
     return decoded_sentence
 
 
-'''
-for seq_index in range(1):
-    # Take one sequence (part of the training set)
-    # for trying out decoding.
-    # n = np.random.randint(0, len(input_texts)-1)
-    input_seq = encoder_input_data[seq_index: seq_index + 1]
-    decoded_sentence = decode_sequence(input_seq)
-    print('-')
-    print('Input sentence:', input_texts[seq_index])
-    print('Decoded sentence:', decoded_sentence)
-'''
-
-
 def encodeWord(word):
     word = word.lower()
     n = len(word)
@@ -99,8 +86,9 @@ def test():
         if phoneme == output_text:
             score = score + 1
             # print(output_text + " | " + phoneme)
-    score = score / nb_lines
+    score = (score / nb_lines) * 100
     print(score)
 
+# 77% lstm bidirectional 5 epochs
 
 test()

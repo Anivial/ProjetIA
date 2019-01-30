@@ -63,6 +63,7 @@ def decode_sequence(input_seq):
 
     return decoded_sentence
 
+
 def encodeWord(word):
     word = word.lower()
     n = len(word)
@@ -70,6 +71,7 @@ def encodeWord(word):
     for i in range(0, n):
         result[0][i][input_token_index[word[i]]] = 1
     return result
+
 
 start = time.time()
 decode_sequence(encodeWord("emmener"))
