@@ -12,8 +12,11 @@ max_decoder_seq_length = Utils.max_phoneme_lengh
 input_token_index = Utils.dico
 target_token_index = Utils.dico_phoneme
 
-encoder_model = load_model('model_save/LSTMB_5/encoder.h5')
-decoder_model = load_model('model_save/LSTMB_5/decoder.h5')
+# encoder_model = load_model('../model_save/LSTM_80/encoder.h5')
+# decoder_model = load_model('../model_save/LSTM_80/decoder.h5')
+
+encoder_model = load_model('encoderGRU.h5')
+decoder_model = load_model('decoderGRU.h5')
 
 # Reverse-lookup token index to decode sequences back to
 # something readable.
@@ -37,8 +40,8 @@ def decode_sequence(input_seq):
     stop_condition = False
     decoded_sentence = ''
     while not stop_condition:
-        output_tokens, h, c = decoder_model.predict(
-            [target_seq] + states_value)
+        output_tokens, h = decoder_model.predict(
+            [target_seq] + [states_value])
 
         # Sample a token
         sampled_token_index = np.argmax(output_tokens[0, -1, :])
@@ -56,7 +59,7 @@ def decode_sequence(input_seq):
         target_seq[0, 0, sampled_token_index] = 1.
 
         # Update states
-        states_value = [h, c]
+        states_value = h
 
     return decoded_sentence
 
@@ -70,7 +73,5 @@ def encodeWord(word):
     return result
 
 
-start = time.time()
-decode_sequence(encodeWord("emmener"))
-print(time.time() - start)
+print(decode_sequence(encodeWord("emmener")))
 

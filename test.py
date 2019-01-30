@@ -11,11 +11,8 @@ max_decoder_seq_length = Utils.max_phoneme_lengh
 input_token_index = Utils.dico
 target_token_index = Utils.dico_phoneme
 
-# encoder_model = load_model('../model_save/LSTM_80/encoder.h5')
-# decoder_model = load_model('../model_save/LSTM_80/decoder.h5')
-
-encoder_model = load_model('encoderBi.h5')
-decoder_model = load_model('decoderBi.h5')
+encoder_model = load_model('model_save/LSTMB_5/encoder.h5')
+decoder_model = load_model('model_save/LSTMB_5/decoder.h5')
 
 # Reverse-lookup token index to decode sequences back to
 # something readable.
