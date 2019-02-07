@@ -12,8 +12,8 @@ max_decoder_seq_length = Utils.max_phoneme_lengh
 input_token_index = Utils.dico
 target_token_index = Utils.dico_phoneme
 
-encoder_model = load_model('model_save/RNN_1/encoder.h5')
-decoder_model = load_model('model_save/RNN_1/decoder.h5')
+encoder_model = load_model('model_save/GRU_150/encoder.h5')
+decoder_model = load_model('model_save/GRU_150/decoder.h5')
 # Reverse-lookup token index to decode sequences back to
 # something readable.
 reverse_input_char_index = dict(

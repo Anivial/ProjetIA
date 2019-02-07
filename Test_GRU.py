@@ -82,9 +82,8 @@ def test():
     for line in lines[:nb_lines - 1]:
         input_text, output_text = line.split('\t')
         phoneme = decode_sequence(encodeWord(input_text)).split('\n')[0]
-        if phoneme.lower() == output_text.lower():
+        if phoneme.lower() == output_text.lower():  # Prendre en compte les majuscules ou non coté phonèmes
             score = score + 1
-            # print(output_text + " | " + phoneme)
         else:
             file.write(input_text + ":" + output_text + " | " + phoneme + "\n")
     score = (score / nb_lines) * 100

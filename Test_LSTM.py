@@ -82,17 +82,17 @@ def test():
     for line in lines[:nb_lines - 1]:
         input_text, output_text = line.split('\t')
         phoneme = decode_sequence(encodeWord(input_text)).split('\n')[0]
-        if phoneme.lower() == output_text.lower():
+        if phoneme.lower() == output_text.lower():  # Prendre en compte les majuscules ou non coté phonèmes
             score = score + 1
-            # print(output_text + " | " + phoneme)
         else:
             file.write(input_text + ":" + output_text + " | " + phoneme + "\n")
     score = (score / nb_lines) * 100
     file.close()
     print(score)
 
+
+# 77% lstm bidirectional 5 epochs
 # 89.97114988322572% lstm bidirectional 150 epochs loss: 1.0803e-04 - val_loss: 0.0035 97.70572880890232%
 # 69.0479461464487% lstm 150 epochs loss: 0.0033 - val_loss: 0.0276 75.05151806566836%
-
 
 test()
