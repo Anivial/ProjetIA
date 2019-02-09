@@ -12,6 +12,8 @@ latent_dim = 256  # Latent dimensionality of the encoding space.
 num_samples = 100  # Number of samples to train on.
 # Path to the data txt file on disk.
 data_path = 'data_train/shuffled_data_train.txt'
+encoder_output_path = 'encoderGRU.h5'
+decoder_output_path = 'decoderGRU.h5'
 
 # Vectorize the data.
 input_texts = []
@@ -105,5 +107,5 @@ decoder_model = Model(
     [decoder_inputs] + [decoder_states_inputs],
     [decoder_outputs] + [decoder_states_outputs])
 
-encoder_model.save('encoderGRU.h5')
-decoder_model.save('decoderGRU.h5')
+encoder_model.save(encoder_output_path)
+decoder_model.save(decoder_output_path)

@@ -13,8 +13,9 @@ if len(sys.argv) >= 2:
     input_token_index = Utils.dico
     target_token_index = Utils.dico_phoneme
 
-    encoder_model = load_model('model_save/GRU_150/encoder.h5')
-    decoder_model = load_model('model_save/GRU_150/decoder.h5')
+    encoder_model = load_model('model_save/LSTMB_150/encoder.h5')
+    decoder_model = load_model('model_save/LSTMB_150/decoder.h5')
+
     # Reverse-lookup token index to decode sequences back to
     # something readable.
     reverse_input_char_index = dict(
@@ -37,8 +38,8 @@ if len(sys.argv) >= 2:
         stop_condition = False
         decoded_sentence = ''
         while not stop_condition:
-            output_tokens, h = decoder_model.predict(
-                [target_seq] + [states_value])
+            output_tokens, h, c = decoder_model.predict(
+                [target_seq] + states_value)
 
             # Sample a token
             sampled_token_index = np.argmax(output_tokens[0, -1, :])
@@ -56,7 +57,7 @@ if len(sys.argv) >= 2:
             target_seq[0, 0, sampled_token_index] = 1.
 
             # Update states
-            states_value = h
+            states_value = [h, c]
 
         return decoded_sentence
 
