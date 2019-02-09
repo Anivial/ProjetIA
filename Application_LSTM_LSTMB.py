@@ -13,6 +13,9 @@ if len(sys.argv) >= 2:
     input_token_index = Utils.dico
     target_token_index = Utils.dico_phoneme
 
+    # encoder_model = load_model('model_save/LSTM_150/encoder.h5')
+    # decoder_model = load_model('model_save/LSTM_150/decoder.h5')
+
     encoder_model = load_model('model_save/LSTMB_150/encoder.h5')
     decoder_model = load_model('model_save/LSTMB_150/decoder.h5')
 

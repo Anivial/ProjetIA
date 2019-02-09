@@ -15,6 +15,7 @@ if len(sys.argv) >= 2:
 
     encoder_model = load_model('model_save/GRU_150/encoder.h5')
     decoder_model = load_model('model_save/GRU_150/decoder.h5')
+
     # Reverse-lookup token index to decode sequences back to
     # something readable.
     reverse_input_char_index = dict(
