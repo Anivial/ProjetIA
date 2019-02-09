@@ -93,6 +93,6 @@ def test():
 
 # 77% lstm bidirectional 5 epochs
 # 89.97114988322572% lstm bidirectional 150 epochs loss: 1.0803e-04 - val_loss: 0.0035 97.70572880890232%
-# 69.0479461464487% lstm 150 epochs loss: 0.0033 - val_loss: 0.0276 75.05151806566836%
+# 84.57205660118147 lstm 150 epochs loss: 5.8166e-04 - val_loss: 0.0096 91.8807528506663%
 
 test()
