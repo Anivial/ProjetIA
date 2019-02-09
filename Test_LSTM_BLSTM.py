@@ -12,8 +12,11 @@ max_decoder_seq_length = Utils.max_phoneme_lengh
 input_token_index = Utils.dico
 target_token_index = Utils.dico_phoneme
 
-encoder_model = load_model('model_save/LSTM_150/encoder.h5')
-decoder_model = load_model('model_save/LSTM_150/decoder.h5')
+# encoder_model = load_model('model_save/LSTM_150/encoder.h5')
+# decoder_model = load_model('model_save/LSTM_150/decoder.h5')
+
+encoder_model = load_model('model_save/BLSTM_150/encoder.h5')
+decoder_model = load_model('model_save/BLSTM_150/decoder.h5')
 
 # Reverse-lookup token index to decode sequences back to
 # something readable.
@@ -91,8 +94,8 @@ def test():
     print(score)
 
 
-# 77% lstm bidirectional 5 epochs
-# 89.97114988322572% lstm bidirectional 150 epochs loss: 1.0803e-04 - val_loss: 0.0035 97.70572880890232%
+# 77%  bidirectional lstm 5 epochs
+# 89.97114988322572% bidirectional lstm 150 epochs loss: 1.0803e-04 - val_loss: 0.0035 97.70572880890232%
 # 84.57205660118147 lstm 150 epochs loss: 5.8166e-04 - val_loss: 0.0096 91.8807528506663%
 
 test()

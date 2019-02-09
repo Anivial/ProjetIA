@@ -16,8 +16,8 @@ if len(sys.argv) >= 2:
     # encoder_model = load_model('model_save/LSTM_150/encoder.h5')
     # decoder_model = load_model('model_save/LSTM_150/decoder.h5')
 
-    encoder_model = load_model('model_save/LSTMB_150/encoder.h5')
-    decoder_model = load_model('model_save/LSTMB_150/decoder.h5')
+    encoder_model = load_model('model_save/BLSTM_150/encoder.h5')
+    decoder_model = load_model('model_save/BLSTM_150/decoder.h5')
 
     # Reverse-lookup token index to decode sequences back to
     # something readable.
